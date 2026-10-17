@@ -1,0 +1,99 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Montserrat", system-ui, sans-serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-periwinkle: var(--periwinkle);
+  --color-mist: var(--mist);
+  --color-mist-2: var(--mist-2);
+  --color-tri: var(--tri);
+}
+
+:root {
+  --radius: 0.75rem;
+  --navy: oklch(0.29 0.19 266);          /* #01017F */
+  --navy-deep: oklch(0.22 0.15 266);     /* #00005C */
+  --periwinkle: oklch(0.67 0.14 266);    /* #6590EA */
+  --mist: oklch(0.94 0.01 270);          /* #E7EAF3 */
+  --mist-2: oklch(0.95 0.025 265);       /* #E9EFFD */
+  --tri: oklch(0.85 0.03 265);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.2 0.05 266);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: var(--navy);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: var(--mist-2);
+  --secondary-foreground: var(--navy);
+  --muted: var(--mist);
+  --muted-foreground: oklch(0.45 0.04 266);
+  --accent: var(--periwinkle);
+  --accent-foreground: var(--navy-deep);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.015 266);
+  --input: oklch(0.86 0.02 266);
+  --ring: var(--periwinkle);
+  --shadow-card: 0 20px 50px -20px color-mix(in oklab, var(--navy) 35%, transparent);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  body { background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+  :focus-visible { outline: 3px solid var(--periwinkle); outline-offset: 2px; }
+}
+
+@utility shadow-card { box-shadow: var(--shadow-card); }
+@utility diag-tl { clip-path: polygon(0 0, 100% 0, 0 100%); }
+@utility diag-br { clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+@utility tri { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+/* Trame discrète du hero (remplace la photo d'ambiance de la version Lovable) */
+@utility hero-grid {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--periwinkle) 14%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--periwinkle) 14%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 75% 40%, #000 0%, transparent 70%);
+}
+@utility fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
