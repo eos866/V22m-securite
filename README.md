@@ -22,3 +22,9 @@ npm run build    # compile le site dans docs/ (copier ensuite docs/* à la racin
 ```
 
 Stack : React 19, Vite, Tailwind CSS 4, icônes lucide-react.
+
+## Version 2 (`/v2/`)
+
+Publiée sur `https://eos866.github.io/V22m-securite/v2/` (copie dans `docs/v2/`), source dans `source-v2/`.
+Ajouts : WhatsApp, zones d'intervention, recrutement, consentement RGPD, mentions légales et politique de confidentialité, données structurées Google.
+Pour recevoir les demandes de devis directement : renseigner `formEndpoint` (Formspree, Web3Forms…) dans `source-v2/src/config/site.ts`, puis recompiler.

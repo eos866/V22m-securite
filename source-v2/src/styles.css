@@ -1,0 +1,104 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Montserrat", system-ui, sans-serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-periwinkle: var(--periwinkle);
+  --color-mist: var(--mist);
+  --color-mist-2: var(--mist-2);
+  --color-tri: var(--tri);
+}
+
+:root {
+  --radius: 0.75rem;
+  --navy: #01017F;
+  --navy-deep: #00005C;
+  --periwinkle: #6590EA;
+  --mist: #E7EAF3;
+  --mist-2: #E9EFFD;
+  --tri: #C9D1E6;
+  --background: #FFFFFF;
+  --foreground: #11142E;
+  --card: #FFFFFF;
+  --card-foreground: var(--foreground);
+  --popover: #FFFFFF;
+  --popover-foreground: var(--foreground);
+  --primary: var(--navy);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--mist-2);
+  --secondary-foreground: var(--navy);
+  --muted: var(--mist);
+  --muted-foreground: #4F5578;
+  --accent: var(--periwinkle);
+  --accent-foreground: var(--navy-deep);
+  --destructive: #C8262E;
+  --destructive-foreground: #FFFFFF;
+  --border: #DCE0EC;
+  --input: #CDD3E4;
+  --ring: var(--periwinkle);
+  --shadow-card: 0 20px 50px -20px rgba(1, 1, 127, 0.35);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { -webkit-font-smoothing: antialiased; }
+  input, select, textarea, button { font: inherit; }
+  select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2301017F' stroke-width='2'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+  summary::-webkit-details-marker { display: none; }
+  body { background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.01em; }
+  :focus-visible { outline: 3px solid var(--periwinkle); outline-offset: 2px; }
+}
+
+@utility shadow-card { box-shadow: var(--shadow-card); }
+@utility diag-tl { clip-path: polygon(0 0, 100% 0, 0 100%); }
+@utility diag-br { clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+@utility tri { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+/* Trame discrète du hero (remplace la photo d'ambiance de la version Lovable) */
+@utility hero-grid {
+  background-image:
+    linear-gradient(rgba(101, 144, 234, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(101, 144, 234, 0.14) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at 75% 40%, #000 0%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 75% 40%, #000 0%, transparent 70%);
+}
+@utility fade-up {
+  animation: fadeUp 0.7s ease-out both;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
