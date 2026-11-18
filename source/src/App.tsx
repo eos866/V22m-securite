@@ -33,11 +33,14 @@ const empty: Form = { services: [], name: "", company: "", phone: "", email: "",
 
 function Logo({ light = false }: { light?: boolean }) {
   return (
-    <a href="#top" className="flex items-center gap-3" aria-label="2M Sécurité, retour en haut de page">
-      <img src={logo} alt="" width={44} height={47} className="h-11 w-auto" />
-      <span className="leading-tight">
-        <span className={`block font-display text-lg font-extrabold ${light ? "text-primary-foreground" : "text-navy"}`}>2M Sécurité</span>
-        <span className={`block text-xs ${light ? "text-mist" : "text-muted-foreground"}`}>Gardiennage & surveillance</span>
+    <a href="#top" className="flex min-w-0 items-center gap-3" aria-label={`${SITE.fullName}, retour en haut de page`}>
+      <img src={logo} alt="" width={48} height={51} className="h-12 w-auto shrink-0" />
+      <span className="min-w-0 leading-tight">
+        <span className={`block truncate font-display text-[15px] font-extrabold uppercase tracking-wide sm:text-base ${light ? "text-primary-foreground" : "text-navy"}`}>{SITE.name}</span>
+        <span className="mt-0.5 flex items-center gap-1.5 whitespace-nowrap text-xs">
+          <span className="rounded bg-periwinkle px-1.5 py-px font-display text-[11px] font-bold uppercase tracking-wider text-white">{SITE.brand}</span>
+          <span className={`hidden sm:inline ${light ? "text-mist" : "text-muted-foreground"}`}>Gardiennage & surveillance</span>
+        </span>
       </span>
     </a>
   );
@@ -115,7 +118,7 @@ export default function App() {
             </ul>
           </nav>
           <div className="hidden items-center gap-5 lg:flex">
-            <a href={SITE.phoneHref} className="flex items-center gap-3">
+            <a href={SITE.phoneHref} className="hidden items-center gap-3 xl:flex">
               <span className="grid h-10 w-10 place-items-center rounded-full bg-mist-2 text-navy"><Phone className="h-5 w-5" aria-hidden /></span>
               <span className="leading-tight"><span className="block text-xs text-muted-foreground">Une urgence ?</span><span className="font-display font-bold text-navy">{SITE.phone}</span></span>
             </a>
@@ -145,20 +148,20 @@ export default function App() {
           <div className="tri absolute left-[45%] top-16 h-6 w-7 bg-tri/30" aria-hidden />
           <div className="tri absolute bottom-24 left-[10%] h-4 w-5 bg-tri/30" aria-hidden />
           <div className="tri absolute right-[8%] top-10 h-5 w-6 rotate-180 bg-periwinkle/50" aria-hidden />
-          <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 md:py-24 lg:grid-cols-[1.3fr_1fr]">
+          <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-14 md:py-20 lg:grid-cols-[1.15fr_1fr] lg:gap-10 xl:grid-cols-[1.3fr_1fr] xl:gap-12 xl:py-24">
             <div className="fade-up">
               <p className="inline-flex items-center gap-2 rounded-full border border-periwinkle/40 bg-navy-deep/50 px-4 py-1.5 text-sm font-semibold text-mist">
                 <ShieldCheck className="h-4 w-4 text-periwinkle" aria-hidden />Agence de sécurité privée à Montpellier
               </p>
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] md:text-6xl">
+              <h1 className="mt-6 text-4xl font-extrabold leading-[1.1] md:text-5xl lg:text-[2.75rem] xl:text-6xl">
                 Votre sécurité, <span className="text-periwinkle">notre engagement</span> jour et nuit
               </h1>
               <p className="mt-6 max-w-xl text-lg text-mist">
                 Gardiennage, rondes de surveillance, contrôle d'accès et sécurité événementielle : des agents qualifiés pour protéger vos biens, vos équipes et votre public dans l'Hérault et en Occitanie.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href="#devis" className="inline-flex items-center justify-center gap-2 rounded-lg bg-periwinkle px-6 py-4 font-display font-bold text-navy-deep hover:bg-mist-2">Demander un devis gratuit <ArrowRight className="h-5 w-5" aria-hidden /></a>
-                <a href={SITE.phoneHref} className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-primary-foreground/30 px-6 py-4 font-display font-bold hover:bg-primary-foreground/10"><Phone className="h-5 w-5" aria-hidden />{SITE.phone}</a>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+                <a href="#devis" className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-periwinkle px-6 py-4 font-display font-bold text-navy-deep hover:bg-mist-2">Demander un devis gratuit <ArrowRight className="h-5 w-5" aria-hidden /></a>
+                <a href={SITE.phoneHref} className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg border-2 border-primary-foreground/30 px-6 py-4 font-display font-bold hover:bg-primary-foreground/10"><Phone className="h-5 w-5" aria-hidden />{SITE.phone}</a>
               </div>
               <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-mist">
                 {["Agents carte pro CNAPS", "Réponse sous 24 h", "Entreprise locale"].map((t) => (
@@ -171,7 +174,7 @@ export default function App() {
               <h2 id="qtitle" className="text-2xl font-extrabold text-navy">Devis express</h2>
               <p className="mt-1 text-sm text-muted-foreground">Gratuit et sans engagement, réponse sous 24 h.</p>
               <label htmlFor="q-s" className="mt-6 block text-sm font-semibold text-navy">Prestation souhaitée</label>
-              <select id="q-s" className={`${input} mt-2`} value={quick.service} onChange={(e) => setQuick({ ...quick, service: e.target.value })}>
+              <select id="q-s" className={`${input} mt-2 pr-10`} value={quick.service} onChange={(e) => setQuick({ ...quick, service: e.target.value })}>
                 <option value="">Choisir une prestation</option>
                 {SERVICES.map((s) => <option key={s.id} value={s.id}>{s.title}</option>)}
               </select>
@@ -226,7 +229,7 @@ export default function App() {
               <h2 className="text-2xl font-extrabold text-navy-deep md:text-3xl">Besoin d'un agent rapidement ?</h2>
               <p className="mt-1 font-semibold text-navy-deep">Appelez-nous, nous étudions votre demande sans attendre.</p>
             </div>
-            <a href={SITE.phoneHref} className="inline-flex items-center gap-3 rounded-lg bg-background px-6 py-4 font-display text-lg font-bold text-navy hover:bg-mist-2"><Phone className="h-5 w-5" aria-hidden />{SITE.phone}</a>
+            <a href={SITE.phoneHref} className="inline-flex items-center gap-3 whitespace-nowrap rounded-lg bg-background px-6 py-4 font-display text-lg font-bold text-navy hover:bg-mist-2"><Phone className="h-5 w-5" aria-hidden />{SITE.phone}</a>
           </div>
         </section>
 
@@ -248,10 +251,10 @@ export default function App() {
         {/* Why + method */}
         <section id="methode" className="mx-auto grid max-w-7xl gap-12 px-4 py-20 md:py-28 lg:grid-cols-2">
           <div>
-            <p className="font-display text-sm font-bold uppercase tracking-widest text-periwinkle">Pourquoi 2M Sécurité</p>
+            <p className="font-display text-sm font-bold uppercase tracking-widest text-periwinkle">Pourquoi {SITE.fullName}</p>
             <h2 className="mt-3 text-3xl font-extrabold text-navy md:text-4xl">Une agence locale, exigeante et disponible</h2>
             <ul className="mt-10 space-y-7">
-              {[[UserCheck, "Agents qualifiés et déclarés", "Titulaires de la carte professionnelle CNAPS, formés et employés dans le respect de la réglementation."],
+              {[[UserCheck, "Agents qualifiés et déclarés", `Entreprise autorisée par le CNAPS (n° ${SITE.cnaps}), agents titulaires de la carte professionnelle, formés et employés dans le respect de la réglementation.`],
                 [Zap, "Réactivité", "Réponse à votre demande sous 24 h et mise en place rapide du dispositif."],
                 [Handshake, "Interlocuteur unique", "Un responsable dédié suit votre dossier, de l'analyse jusqu'au reporting."],
                 [MapPin, "Proximité", "Basés à Montpellier, nous connaissons le territoire et intervenons dans tout l'Hérault et en Occitanie."]].map(([I, t, d]) => {
@@ -332,7 +335,7 @@ export default function App() {
                 )}
               </div>
               <ul className="space-y-4">
-                {[[Phone, "Téléphone", SITE.phone, SITE.phoneHref], [Mail, "E-mail", SITE.email, `mailto:${SITE.email}`], [MapPin, "Zone d'intervention", "Montpellier, Hérault et Occitanie", null]].map(([I, t, v, h]) => {
+                {[[Phone, "Téléphone", SITE.phone, SITE.phoneHref], [Mail, "E-mail", SITE.email, `mailto:${SITE.email}`], [MapPin, "Adresse", `${SITE.address}, ${SITE.city}`, "https://www.google.com/maps/search/?api=1&query=73+rue+Robert+de+Cotte+34080+Montpellier"], [MapPin, "Zone d'intervention", "Montpellier, Hérault et Occitanie", null]].map(([I, t, v, h]) => {
                   const Icon = I as typeof Phone;
                   const inner = <><span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-navy text-primary-foreground"><Icon className="h-6 w-6" aria-hidden /></span><span><span className="block text-sm text-muted-foreground">{t as string}</span><span className="font-display font-bold text-navy">{v as string}</span></span></>;
                   return <li key={t as string}>{h ? <a href={h as string} className="flex items-center gap-4 rounded-2xl bg-card p-5 hover:shadow-card">{inner}</a> : <div className="flex items-center gap-4 rounded-2xl bg-card p-5">{inner}</div>}</li>;
@@ -371,6 +374,7 @@ export default function App() {
           <div>
             <Logo light />
             <p className="mt-4 max-w-xs text-sm">Agence de sécurité privée à Montpellier : gardiennage et surveillance dans l'Hérault et en Occitanie.</p>
+            <p className="mt-3 max-w-xs text-xs">Autorisation d'exercice CNAPS n° {SITE.cnaps}</p>
           </div>
           <nav aria-label="Liens du pied de page">
             <h2 className="font-display font-bold text-primary-foreground">Navigation</h2>
@@ -383,22 +387,22 @@ export default function App() {
             <ul className="mt-4 space-y-2 text-sm">
               <li><a href={SITE.phoneHref} className="hover:text-primary-foreground">{SITE.phone}</a></li>
               <li><a href={`mailto:${SITE.email}`} className="hover:text-primary-foreground">{SITE.email}</a></li>
-              <li>{SITE.zone}</li>
+              <li>{SITE.address}<br />{SITE.city}</li>
             </ul>
           </div>
         </div>
         <div className="relative border-t border-primary-foreground/10">
           <div className="mx-auto max-w-7xl space-y-2 px-4 py-6 text-xs leading-relaxed">
-            <p>2M SÉCURITÉ · SAS au capital de 100 € · RCS Montpellier 983 892 621 · SIRET 983 892 621 00019 · TVA FR79983892621 · NAF 80.10Z</p>
+            <p>3S FERGO GRAND SUD / 2M SÉCURITÉ · SAS au capital de 100 € · RCS Montpellier 983 892 621 · SIRET 983 892 621 00019 · TVA FR79983892621 · NAF 80.10Z</p>
             <p>Autorisation d'exercice CNAPS n° {SITE.cnaps}</p>
             <p>« L'autorisation d'exercice délivrée par le CNAPS ne confère aucune prérogative de puissance publique à l'entreprise ou aux personnes qui en bénéficient. » (article L.612-14 du Code de la sécurité intérieure)</p>
-            <p>© {new Date().getFullYear()} 2M Sécurité</p>
+            <p>© {new Date().getFullYear()} {SITE.fullName}</p>
           </div>
         </div>
       </footer>
 
       {/* Mobile action bar */}
-      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t bg-background p-3 lg:hidden">
+      <div className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-2 gap-2 border-t bg-background p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
         <a href={SITE.phoneHref} className="flex items-center justify-center gap-2 rounded-lg border-2 border-navy py-3 font-display font-bold text-navy"><Phone className="h-5 w-5" aria-hidden />Appeler</a>
         <a href="#devis" className="flex items-center justify-center rounded-lg bg-navy py-3 font-display font-bold text-primary-foreground">Devis gratuit</a>
       </div>
