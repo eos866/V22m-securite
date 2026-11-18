@@ -36,7 +36,7 @@ const empty: Form = { services: [], name: "", company: "", phone: "", email: "",
 function Logo({ light = false }: { light?: boolean }) {
   return (
     <a href="#top" className="flex min-w-0 items-center gap-3" aria-label={`${SITE.fullName}, retour en haut de page`}>
-      <img src={logo} alt="" width={48} height={51} className="h-12 w-auto shrink-0" />
+      <img src={logo} alt="Logo 3S Fergo Grand Sud / 2M Sécurité" width={64} height={68} className={`w-auto shrink-0 ${light ? "h-20" : "h-14 lg:h-16"}`} />
       <span className="min-w-0 leading-tight">
         <span className={`block truncate font-display text-[15px] font-extrabold uppercase tracking-wide sm:text-base ${light ? "text-primary-foreground" : "text-navy"}`}>{SITE.name}</span>
         <span className="mt-0.5 flex items-center gap-1.5 whitespace-nowrap text-xs">
